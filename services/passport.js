@@ -18,7 +18,8 @@ passport.use(
 		{
 			clientID     : process.env.GOOGLE_ID,
 			clientSecret : process.env.GOOGLE_KEY,
-			callbackURL  : 'http://localhost:5000/auth/google/callback'
+			callbackURL  : '/auth/google/callback',
+			proxy        : true
 		},
 		async (accessToken, refreshToken, profile, done) => {
 			// Check if we already have a user with that Google profile ID
