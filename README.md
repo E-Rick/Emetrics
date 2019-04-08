@@ -9,6 +9,9 @@ Email campaign analytics built with MongoDB, React, Express, Node
     │   ├── routes              # All route handlers, grouped by purpose
     │   ├── services            # Helper modules and business logic
     │   └── ... 
+    ├── .gitignore
+    ├── package-lock.json
+    ├── package.json
     └── README.md
 
 ### Usage
