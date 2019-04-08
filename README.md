@@ -10,3 +10,5 @@ Email campaign analytics built with MongoDB, React, Express, Node
     │   ├── services            # Helper modules and business logic
     │   └── ... 
     └── README.md
+
+### Usage
