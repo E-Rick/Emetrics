@@ -11,17 +11,20 @@ mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 
 const app = express();
 
+app.use(express.json()); // builtin express middleware to parse incoming requests with JSON payload
+app.use(express.urlencoded({ extended: false }));
 app.use(
 	cookieSession({
 		maxAge : 30 * 24 * 60 * 1000, // tell cookie to last for 30 days
-		keys   : [ process.env.COOKIE_KEY ] // key to encrypt cookie
+		keys   : [process.env.COOKIE_KEY] // key to encrypt cookie
 	})
 );
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Call the module.exports function with app as param
+// Call the module.exports function returned from routes with app object as param
 require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 app.get('/', (req, res) => {
 	res.send({ bye: 'buddy' });
