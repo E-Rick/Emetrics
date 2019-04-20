@@ -6,7 +6,7 @@ import { FETCH_USER } from './types';
   containing the action type and payload from the axios response to the reducer authReducer.js
 */
 export const fetchUser = () => async dispatch => {
-	const res = await axios.get('/api/current_user'); // get response from back end server
+	const res = await axios.get('/api/user'); // get response from back end server
 	dispatch({ type: FETCH_USER, payload: res.data }); //dispatch response data
 };
 
