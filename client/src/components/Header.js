@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'; // specific router library for browser dom and not native
-
+import StripeWrapper from './StripeWrapper';
 class Header extends Component {
 	// @desc helper method that inspects the this.props.auth property and returns jsx depending on return
 	renderContent() {
 		switch (this.props.auth) {
-			case null:
+			case null: //waiting for response
 				return;
-			case false:
+			case false: //the user is not logged in
 				return (
 					<li>
 						<a href='/auth/google'>Login With Google</a>
 					</li>
 				);
+			//when the user is logged in
 			default:
-				return (
-					<li>
+				return [
+					<li key='1'>
+						<StripeWrapper />
+					</li>,
+					<li key='2' style={{ margin: '0 10px' }}>
+						Credits: {this.props.auth.credits}
+					</li>,
+					<li key='3'>
 						<a href='/api/logout'>Logout</a>
 					</li>
-				);
+				];
 		}
 	}
 
