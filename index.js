@@ -31,10 +31,10 @@ app.use(passport.session());
 
 // Mount the routes
 app.use('/auth/google', google);
-app.use('/auth/facebook', facebook);
+// app.use('/auth/facebook', facebook);
 app.use('/api/user', user);
 app.use('/api/stripe', stripe);
-app.use('/api/surveys', surveys);
+// app.use('/api/surveys', surveys);
 
 if (process.env.NODE_ENV === 'production') {
 	// Express will serve up production assets like our main.js file, or main.css file
