@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 require('./models/user');
+require('./models/survey');
 require('./services/passportGoogle');
 
 // Import routes
@@ -11,7 +12,7 @@ const google = require('./routes/auth/google');
 const facebook = require('./routes/auth/facebook');
 const user = require('./routes/api/user');
 const stripe = require('./routes/api/stripe');
-const survey = require('./routes/api/surveys');
+const surveys = require('./routes/api/surveys');
 
 // connect to MongoDB database
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
@@ -34,7 +35,7 @@ app.use('/auth/google', google);
 // app.use('/auth/facebook', facebook);
 app.use('/api/user', user);
 app.use('/api/stripe', stripe);
-// app.use('/api/surveys', surveys);
+app.use('/api/surveys', surveys);
 
 if (process.env.NODE_ENV === 'production') {
 	// Express will serve up production assets like our main.js file, or main.css file
