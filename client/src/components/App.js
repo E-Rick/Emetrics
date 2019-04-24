@@ -10,10 +10,8 @@ import { connect } from 'react-redux'; // gives certain components ability to ca
 import * as actions from '../actions'; //import action creators and assign them to the obj actions
 import Header from './Header';
 import Landing from './Landing';
-
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyNew = () => <h2>SurveyNew</h2>;
-
+import Dashboard from './Dashboard';
+import SurveyNew from './surveys/SurveyNew';
 class App extends Component {
 	componentDidMount() {
 		this.props.fetchUser(); // fetchUser action creator
