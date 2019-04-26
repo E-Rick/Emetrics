@@ -1,8 +1,9 @@
 # Emetrics
-Email campaign analytics built with MongoDB, React, Express, Node
 
+Emetrics is a small email marketing campaigns web application, built with the MERN stack and redux, that empowers startups and small businesses by measuring customer satisfaction and adding social proof. Users of Emetrics are able to create surveys to be sent out to customers and end users to generate feedback and view analytics such clicks and opens.
 
-### Project Structure
+## Project Structure 
+
     .                               # Server files
     ├── client                      # Front End Client React files
     ├── middlewares                 # Server middleware
@@ -14,22 +15,106 @@ Email campaign analytics built with MongoDB, React, Express, Node
     ├── .gitignore
     ├── package-lock.json
     ├── package.json
-    └── README.md 
-    
-### Usage
+    └── README.md
 
-.env in server folder
+## Technology Used
+
+### Back end
+
+* MongoDB
+* Express
+* Node.js
+* Stripe API
+* Sendgrid API
+* Facebook API
+* PassportJS
+* Concurrently
+* Dotenv
+
+### Front end
+
+* React
+* Redux
+* React-router
+* Redux-forms
+* Redux-thunk
+* Materialize-CSS
+* React-stripe-checkout
+* Axios
+
+### Deployment
+
+* Heroku
+* MongoDB Atlas
+* AWS
+
+## Usage
+
+```Shell
+git clone https://github.com/E-Rick/Emetrics.git
+cd Emetrics
+npm install
+npm run dev
+```
+
+## Before you npm run
+
+### Get your API Keys
+
+Emetrics requires you to have .env files to store your secret API keys and config
+From within the root directory:
+
 ```shell
-GOOGLE_ID
-GOOGLE_KEY
+touch .env
+```
+
+Add the following keys:
+
+```Shell
+GOOGLE_ID=
+GOOGLE_KEY=
 DATABASE_URL=mongodb://localhost:27017/emetrics
-COOKIE_KEY
-STRIPE_PUBLISHABLE_KEY
-STRIPE_SECRET_KEY
-SENDGRID_KEY
+COOKIE_KEY=
+STRIPE_PUBLISHABLE_KEY=
+STRIPE_SECRET_KEY=
+SENDGRID_KEY=
 REDIRECT_DOMAIN=http://localhost:3000
 ```
-.env in client folder 
+
+The Front end, located in the client folder, also requires a .env file for the Stipe Payment modal to work
+
 ```shell
-REACT_APP_STRIPE_KEY
+cd client
+touch .env
 ```
+
+Add the following key (Stripe publishable key):
+
+```Shell
+REACT_APP_STRIPE_KEY=
+```
+
+You will have create accounts on these websites to recieve the following API keys: 
+
+* You will have to ensure that you have a [MongoDB atlas account](https://www.mongodb.com/cloud/atlas)
+* You will have to ensure that you have a [Google API console account](https://console.developers.google.com/)
+* You will have to ensure that you have a [Facebook developer account](https://developers.facebook.com/)
+* You will have to ensure that you have a [Stripe account](https://stripe.com)
+* You will have to ensure that you have a [Sendgrid account](https://sendgrid.com)
+  
+## How it Works
+
+* This project was developed for learning purposes and functions as a email marketing survey creator.
+* Login or register your profile.
+* Add credits to your account through the 'add credits' button using the stripe payment system
+* Use this card number: 4242 4242 4242 4242 to be able to pay with stripe (it's in test mode)
+* Use your credits to create a survey and send it out
+* Recipients recieve and hopefully engage with the emails and then you collect your feedback!
+* Go back to the dashboard page and check your analytics for updates
+
+## Going Forward
+
+- [ ] Finish survey feedback implementation
+- [ ] Create a logo
+- [ ] Design and implement front end design
+- [ ] Finish README.md and code documentation
