@@ -12,9 +12,11 @@ const SurveyField = ({ input, label, meta: { error, touched } }) => {
 	return (
 		<div>
 			<label>{label}</label>
-			<input {...input} />
-			{/* if user touches input and validation returns an error, render error */}
-			{touched && error}
+			<input {...input} style={{ marginBottom: '5px' }} />
+			<div className='red-text' style={{ marginBottom: '20px' }}>
+				{/* if user touches input and validation returns an error, render error */}
+				{touched && error}
+			</div>
 		</div>
 	);
 };
