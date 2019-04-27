@@ -129,3 +129,4 @@ You will have create accounts on these websites to recieve the following API key
 - [ ] Create a logo
 - [ ] Design and implement front end design
 - [ ] Finish README.md and code documentation
+- [ ] Add SMS Marketing
