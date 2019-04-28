@@ -95,7 +95,7 @@ module.exports = survey => {
   		<div style="text-align: center">
   			<h1>The Emetrics Application</h1>
   			<h2>WE ARE REQUESTING YOUR HELP!</h2>
-  			<p>Please, help us answering the folowing question:</p>
+  			<p>Please, help us by answering the following question:</p>
   			<h3>${survey.body}</h3>
   			<div>
           <a href='${process.env.REDIRECT_DOMAIN}/api/surveys/${survey.id}/yes'>Yes</a>
