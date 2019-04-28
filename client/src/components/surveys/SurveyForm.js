@@ -4,22 +4,16 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import SurveyField from './SurveyField';
 import validateEmails from '../../utils/validateEmails';
-
-const FIELDS = [
-	{ label: 'Survey Title', name: 'title', noValueError: 'You must provide a survey title' },
-	{ label: 'Subject Line', name: 'subject', noValueError: 'You must provide a subject' },
-	{ label: 'Email Body', name: 'body', noValueError: 'You must provide a body' },
-	{ label: 'Recipient List', name: 'emails', noValueError: 'You must provide a recipient list' }
-];
+import formFields from './formFields';
 
 /**
  * Shows a form for a user to add input
  */
 class SurveyForm extends Component {
-	// helper function to iterate over FIELDS array and for every object, create
+	// helper function to iterate over formFields array and for every object, create
 	// and return one custom redux field object that uses the props label and name
 	renderFields() {
-		return _.map(FIELDS, ({ label, name }) => {
+		return _.map(formFields, ({ label, name }) => {
 			return <Field key={name} component={SurveyField} text='text' label={label} name={name} />;
 		});
 	}
@@ -27,7 +21,7 @@ class SurveyForm extends Component {
 	render() {
 		return (
 			<div>
-				<form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+				<form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
 					{this.renderFields()}
 					<Link to='/surveys' className='red btn-flat white-text'>
 						Cancel
@@ -50,18 +44,25 @@ class SurveyForm extends Component {
 function validate(values) {
 	const errors = {};
 
-	errors.emails = validateEmails(values.emails || '');
+	// call validateEmails helper to validate emails and return errors or '' if empty
+	errors.recipients = validateEmails(values.recipients || '');
 
-	// add errors with matching values props
-	_.each(FIELDS, ({ name, noValueError }) => {
+	// iterate over formFields & add no value errors with matching values props
+	_.each(formFields, ({ name, noValueError }) => {
 		if (!values[name]) errors[name] = noValueError;
 	});
 
 	return errors;
 }
 
-// pass in validate function to be run every submit
+/**
+ * Redux form helper that functions like connect helper and you pass in config here
+ * @param validate Pass in validation function to be run everytime form submits
+ * @param form Specifies where redux form will store all the form values inside the redux store
+ * @param destroyOnUnmount Config to save form values in redux form when form isn't rendered
+ */
 export default reduxForm({
 	validate,
-	form     : 'surveyForm'
+	form             : 'surveyForm',
+	destroyOnUnmount : false
 })(SurveyForm);
