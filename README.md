@@ -1,6 +1,6 @@
 # Emetrics
 
-Emetrics is a small email marketing campaigns web application, built with the MERN stack and redux, that empowers startups and small businesses by measuring customer satisfaction and adding social proof. 
+Emetrics is a email marketing campaigns web application, built with the MERN stack and redux, that empowers startups and small businesses by measuring customer satisfaction and adding social proof. 
 
 Users of Emetrics are able to create surveys to be sent out to customers and end users to generate feedback and view analytics such clicks and opens.
 
@@ -91,7 +91,7 @@ SENDGRID_KEY=
 REDIRECT_DOMAIN=http://localhost:3000
 ```
 
-The Front end, located in the client folder, also requires a .env file for the Stipe Payment modal to work
+The front end, located in the client folder, also requires a .env file for the Stipe Payment modal to work
 
 ```shell
 cd client
