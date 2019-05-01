@@ -1,4 +1,7 @@
+const _ = require('lodash'); // helper module to help with iterations
 const router = require('express').Router();
+const { Path } = require('path-parser');
+const { URL } = require('url'); // default helper module in node.js for parsing urls
 const requireLogin = require('../../middlewares/requireLogin');
 const requireCredits = require('../../middlewares/requireCredits');
 const Survey = require('../../models/survey');
@@ -27,9 +30,40 @@ router.get('/:surveyId/:choice', (req, res) => {
 /**
  * @route  POST /api/surveys/webhooks 
  * @desc   Record feedback from a user
- * @access private 
+ * @access public 
  */
-router.post('/webhooks', requireLogin, (req, res) => {});
+router.post('/webhooks', (req, res) => {
+	const p = new Path('/api/surveys/:surveyId/:choice');
+	// map SendGrid events onto onto events array
+	_.chain(req.body) // use lodash chain to chain together lodash methods on req.body
+		.map(({ event, email, url }) => {
+			if (event === 'click') {
+				// verify event from SendGrid is a click event
+				const match = p.test(new URL(url).pathname); // either object {surveyId: 'xxx', choice: 'xxx'} or null
+				if (match) return { email, surveyId: match.surveyId, choice: match.choice };
+			}
+		})
+		.compact() // remove undefined elements in the array
+		.uniqBy('email', 'surveyId') // make sure there are no duplicate records with same email and surveyId
+		.each(event => {
+			// for every event in events array run this query
+			Survey.updateOne(
+				{
+					_id        : surveyId,
+					recipients : {
+						$elemMatch : { email: email, responded: false }
+					}
+				},
+				{
+					$inc : { [choice]: 1 },
+					$set : { 'recipients.$.responded': true }
+				}
+			);
+		})
+		.value(); // return the value
+
+	res.send({});
+});
 
 /**
  * @route  POST /api/surveys 
