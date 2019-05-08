@@ -45,7 +45,7 @@ router.post('/webhooks', (req, res) => {
 		})
 		.compact() // remove undefined elements in the array
 		.uniqBy('email', 'surveyId') // make sure there are no duplicate records with same email and surveyId
-		.each(event => {
+		.each(({ surveyId, email, choice }) => {
 			// for every event in events array run this query
 			Survey.updateOne(
 				{
@@ -58,7 +58,7 @@ router.post('/webhooks', (req, res) => {
 					$inc : { [choice]: 1 },
 					$set : { 'recipients.$.responded': true }
 				}
-			);
+			).exec();
 		})
 		.value(); // return the value
 
