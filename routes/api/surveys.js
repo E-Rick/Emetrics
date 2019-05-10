@@ -13,7 +13,11 @@ const surveyTemplate = require('../../services/emailTemplates/surveyTemplate');
  * @desc   Return a list of surveys created by the current user
  * @access private 
  */
-router.get('/', requireLogin, (req, res) => {});
+router.get('/', requireLogin, async (req, res) => {
+	// find the survey and exclude recipients array to reduce object size
+	const surveys = await Survey.find({ _user: req.user.id }).select({ recipients: false });
+	res.send(surveys);
+});
 
 /**
  * @route  GET /api/surveys/:surveysId/:choice
@@ -55,8 +59,9 @@ router.post('/webhooks', (req, res) => {
 					}
 				},
 				{
-					$inc : { [choice]: 1 },
-					$set : { 'recipients.$.responded': true }
+					$inc          : { [choice]: 1 },
+					$set          : { 'recipients.$.responded': true },
+					lastResponded : new Date()
 				}
 			).exec();
 		})
