@@ -15,7 +15,7 @@ class Mailer extends helper.Mail {
 		super(); // call helper.Mail constructor
 
 		this.sgApi = sendgrid(process.env.SENDGRID_KEY);
-		this.from_email = new helper.Email('no-reply@emetrics.com');
+		this.from_email = new helper.Email('no-reply@emetrics.herokuapp.com');
 		this.subject = subject;
 		this.body = new helper.Content('text/html', content);
 		this.recipients = this.formatAddresses(recipients);
