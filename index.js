@@ -6,6 +6,7 @@ const passport = require('passport');
 require('./models/user');
 require('./models/survey');
 require('./services/passportGoogle');
+require('./services/passportFacebook');
 
 // Import routes
 const google = require('./routes/auth/google');
@@ -32,7 +33,7 @@ app.use(passport.session());
 
 // Mount the routes
 app.use('/auth/google', google);
-// app.use('/auth/facebook', facebook);
+app.use('/auth/facebook', facebook);
 app.use('/api/user', user);
 app.use('/api/stripe', stripe);
 app.use('/api/surveys', surveys);

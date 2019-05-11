@@ -9,11 +9,14 @@ class Header extends Component {
 			case null: //waiting for response
 				return;
 			case false: //the user is not logged in
-				return (
+				return [
 					<li>
 						<a href='/auth/google'>Login With Google</a>
+					</li>,
+					<li>
+						<a href='/auth/facebook'>Login With Facebook</a>
 					</li>
-				);
+				];
 			//when the user is logged in
 			default:
 				return [
