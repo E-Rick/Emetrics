@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'; // specific router library for browser dom and not native
-import StripeWrapper from './StripeWrapper';
+import StripeWrapper from '../stripe/StripeWrapper';
 class Header extends Component {
 	// @desc helper method that inspects the this.props.auth property and returns jsx depending on return
 	renderContent() {
@@ -28,6 +28,9 @@ class Header extends Component {
 					</li>,
 					<li key='3'>
 						<a href='/api/user/logout'>Logout</a>
+					</li>,
+					<li key='4'>
+						<img id='avatar' className='circle' src={this.props.auth.avatar} alt={this.props.auth.name} />
 					</li>
 				];
 		}
@@ -37,7 +40,7 @@ class Header extends Component {
 		// console.log(this.props);
 		return (
 			<nav>
-				<div className='nav-wrapper'>
+				<div className='nav-wrapper container'>
 					{/* If user is logged in redirect to /surveys or landing if not logged in */}
 					<Link to={this.props.auth ? '/surveys' : '/'} className='left brand-logo'>
 						Emetrics

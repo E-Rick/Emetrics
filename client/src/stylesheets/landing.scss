@@ -1,0 +1,74 @@
+@import 'variables.scss';
+
+h1 {
+	color: $red;
+	font-weight: bold;
+	font-size: 50px;
+	margin-top: 150px;
+	text-align: left;
+	margin-bottom: 16px;
+}
+
+h2 {
+	color: $blue;
+	font-size: 40px;
+	font-weight: bold;
+	margin: 16px 0px;
+}
+
+h3 {
+	font-size: 25px;
+	margin: 16px 0px;
+	text-align: left;
+}
+
+h4 {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 16px 0px;
+}
+
+p {
+	font-size: 20px;
+	margin-top: 16px;
+}
+
+.container {
+	font-family: $font-stack;
+	width: 85.42%;
+}
+
+.hero {
+	background: url(require('../utils/images/bg-dotted.png'));
+	background-size: cover;
+	img {
+		position: absolute;
+		top: 65px;
+		right: 0px;
+	}
+}
+
+.features {
+	height: 265px;
+}
+
+.btn-large {
+	background-color: $orange;
+	border-radius: 1000px;
+	font-size: 20px;
+	width: 150px;
+}
+
+.waves-effect.waves-brown .waves-ripple {
+	/* The alpha value allows the text and background color
+   of the button to still show through. */
+	background-color: rgba(121, 85, 72, 0.65);
+}
+
+.muted {
+	color: $grey;
+}
+
+.get-started h1 {
+	margin-top: 115px;
+}
