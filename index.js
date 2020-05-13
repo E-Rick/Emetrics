@@ -16,7 +16,7 @@ const stripe = require('./routes/api/stripe');
 const surveys = require('./routes/api/surveys');
 
 // connect to MongoDB database
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 
